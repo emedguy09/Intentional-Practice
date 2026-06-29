@@ -58,7 +58,7 @@ pre{white-space:pre-wrap;font-family:inherit;margin:6px 0;line-height:1.35}
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2563eb">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vandy Skills">
+<meta name="apple-mobile-web-app-title" content="Intentional-Practice">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="icon-180.png">
 <script>
@@ -69,7 +69,8 @@ if ('serviceWorker' in navigator) {
 </head>
 <body>
 <header>
-  <h1>Vanderbilt Skills Tracker</h1>
+  <h1>Intentional Practice</h1>
+<small>Powered by ReflectRx™</small>
   <small>CALM • DRAAN • BASMARTER • Review Log</small>
 </header>
 
@@ -215,7 +216,7 @@ leadership, and self-management.
 <div class="footer no-print">Stored locally on this device. Use Export Backup for safekeeping.</div>
 
 <script>
-const KEY='vanderbilt_skills_tracker_v2';
+const KEY='intentional_practice_v1';
 function entries(){return JSON.parse(localStorage.getItem(KEY)||'[]')}
 function setEntries(data){localStorage.setItem(KEY,JSON.stringify(data))}
 function nowDate(){return new Date().toLocaleString()}
@@ -280,14 +281,14 @@ function duplicateEntry(id){let e=entries().find(x=>x.id===id); if(!e)return; le
 
 function exportJSON(){
  let blob=new Blob([JSON.stringify(entries(),null,2)],{type:'application/json'});
- download(blob,'vanderbilt_skills_backup.json');
+ download(blob,'Intentional_Practice_backup.json');
 }
 function exportText(){
  let text=entries().map(e=>{
   let fields=Object.entries(e.fields||{}).map(([k,v])=>`${k}:\n${v}`).join('\n\n');
   return `${e.type} - ${e.title}\n${e.created}${e.person?' | '+e.person:''}${e.rating?' | '+e.rating:''}\n\n${fields}\n\n---\n`;
  }).join('\n');
- download(new Blob([text],{type:'text/plain'}),'vanderbilt_skills_summary.txt');
+ download(new Blob([text],{type:'text/plain'}),'Intentional_Practice_summary.txt');
 }
 function download(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click()}
 function restoreJSON(){
